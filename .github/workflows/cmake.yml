@@ -64,3 +64,8 @@ jobs:
       shell: bash
       # Execute the build.  You can specify a specific target with "--target <NAME>"
       run: cmake --build . --config $BUILD_TYPE --parallel $(nproc)
+    - name: Upload ELF artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: elf-${{ matrix.board }}
+        path: ${{ github.workspace }}/pico-examples/build.${{ matrix.board }}/**/*.elf
